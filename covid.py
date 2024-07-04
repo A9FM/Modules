@@ -1,12 +1,13 @@
 from pyrogram import Client, filters
-from covid import Covid
-from plugins.settings.main_settings import module_list, file_list
-
+from modules.plugins_1system.settings.main_settings import module_list, file_list
 from prefix import my_prefix
-prefix = my_prefix()
 
+from requirements_installer import install_library
+install_library("covid -U") 
 
-@Client.on_message(filters.command("covid_en", prefixes=prefix) & filters.me)
+from covid import Covid
+
+@Client.on_message(filters.command("covid_en", prefixes=my_prefix()) & filters.me)
 async def covid_local(client, message):
     region = " ".join(message.command[1:])
     await message.edit("<code>Data retrieval...</code>")
@@ -30,7 +31,7 @@ async def covid_local(client, message):
         await message.edit(f'<code>There is no region called "{region}"</code>')
 
 
-@Client.on_message(filters.command("covid_ru", prefixes=prefix) & filters.me)
+@Client.on_message(filters.command("covid_ru", prefixes=my_prefix()) & filters.me)
 async def covid_local(client, message):
     region = " ".join(message.command[1:])
     await message.edit("<code>Получение данных...</code>")
@@ -54,5 +55,5 @@ async def covid_local(client, message):
         await message.edit(f'<code>Нет такой страны с названием  "{region}"</code>')
 
 
-module_list['StatisticsCovid19'] = f'{prefix}covid_[en|ru] [region]'
+module_list['StatisticsCovid19'] = f'{my_prefix()}covid_[en|ru] [region]'
 file_list['StatisticsCovid19'] = 'covid.py'
