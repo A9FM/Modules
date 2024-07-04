@@ -1,14 +1,12 @@
 from pyrogram import Client, filters
+from modules.plugins_1system.settings.main_settings import module_list, file_list
+from prefix import my_prefix
 
-from plugins.settings.main_settings import module_list, file_list
 import asyncio
 import time
 
-from prefix import my_prefix
-prefix = my_prefix()
 
-
-@Client.on_message(filters.command("sw", prefix) & filters.me)
+@Client.on_message(filters.command("sw", prefixes=my_prefix()) & filters.me)
 async def switch(client, message):
     text = " ".join(message.command[1:])
     ru_keys = """ёйцукенгшщзхъфывапролджэячсмитьбю.Ё"№;%:?ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭ/ЯЧСМИТЬБЮ,"""
@@ -29,5 +27,5 @@ async def switch(client, message):
         await message.edit(text)
 
 
-module_list['Switch'] = f'{prefix}sw [Reply | text]'
+module_list['Switch'] = f'{my_prefix()}sw [Reply | text]'
 file_list['Switch'] = 'switch.py'
