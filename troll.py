@@ -199,5 +199,23 @@ async def kill(client, message):
         await message.edit_text(animation_chars[i % 103])
 
 
-module_list['Troll'] = f'{my_prefix()}hack | {my_prefix()}drugs | {my_prefix()}mum | {my_prefix()}police | {my_prefix()}ghoul | {my_prefix()}stupid | {my_prefix()}bombs | {my_prefix()}call | {my_prefix()}kill'
+@Client.on_message(filters.command("ZV", prefixes=my_prefix()) & filters.me)
+async def ZV(client,message):
+    rofl_list = {
+        'З':'Z',
+        'з':'Z',
+        'С':'Z',
+        'с':'Z',
+        'В':'V',
+        'в':'V',
+        'О':'O',
+        'о':'O',
+    }
+    text = ' '.join(message.text.split()[1:])
+    for word , word_replace in rofl_list.items():
+        text = text.replace(word, word_replace)
+    await client.edit_message_text(message.chat.id, message.id, text)
+
+
+module_list['Troll'] = f'{my_prefix()}hack | {my_prefix()}drugs | {my_prefix()}mum | {my_prefix()}police | {my_prefix()}ghoul | {my_prefix()}stupid | {my_prefix()}bombs | {my_prefix()}call | {my_prefix()}kill | {my_prefix()}ZV [text]'
 file_list['Troll'] = 'troll.py'
