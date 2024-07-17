@@ -20,5 +20,5 @@ async def wait_command(client, message):
     except Exception as e:
         message.reply(f"Error | {e}")
 
-module_list['Example'] = f'{my_prefix()}wait'
-file_list['Example'] = 'example.py'
+module_list['WaitDoksBlyaaa'] = f'{my_prefix()}wait'
+file_list['WaitDoksBlyaaa'] = 'wait_doks_blyaaa.py'
